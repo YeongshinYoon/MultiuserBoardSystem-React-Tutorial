@@ -12,7 +12,7 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     overflowX: "auto"
   },
   table: {
@@ -20,34 +20,23 @@ const styles = theme => ({
   }
 })
 
-const users = [
-  {
-    'id': 1,
-    'image': 'https://placeimg.com/64/64/1',
-    'name' : '홍길동1',
-    'birthday' : '111111',
-    'gender' : '남자',
-    'job' : '학생'
-  },
-  {
-    'id': 2,
-    'image': 'https://placeimg.com/64/64/2',
-    'name' : '홍길동2',
-    'birthday' : '222222',
-    'gender' : '남자',
-    'job' : '학생'
-  },
-  {
-    'id': 3,
-    'image': 'https://placeimg.com/64/64/3',
-    'name' : '홍길동3',
-    'birthday' : '333333',
-    'gender' : '남자',
-    'job' : '학생'
-  }
-]
-
 class App extends Component {
+  state = {
+    users: ""
+  }
+
+  componentDidMount() {
+    this.callAPI()
+    .then(res => this.setState({ users: res }))
+    .catch(err => console.log("componentDidMount(): ", err));
+  }
+
+  callAPI = async () => {
+    const response = await fetch('/api/users');
+    const body = await response.json();
+    return body;
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -65,7 +54,7 @@ class App extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map(user => {
+            {this.state.users ? this.state.users.map(user => {
               return (
                 <User
                   key={user.id} //map을 사용할 때는 각 요소의 구분을 위해 key props를 추가
@@ -77,7 +66,7 @@ class App extends Component {
                   job={user.job}
                 />
               )
-            })}
+            }) : ""}
           </TableBody>
         </Table>
       </Paper>
