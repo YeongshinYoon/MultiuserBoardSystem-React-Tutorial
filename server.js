@@ -1,10 +1,20 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+require("dotenv").config({ path: "variables.env"});
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true }, (err) =>{
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Connected to DB succesfully.");
+  }
+});
 
 //for Debugging
 app.get('/api/hello', (req, res) => {
