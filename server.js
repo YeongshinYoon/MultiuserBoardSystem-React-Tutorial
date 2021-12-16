@@ -1,28 +1,24 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const app = express();
+
+const mongoose = require("mongoose");
+require("dotenv").config({ path: "variables.env"});
+const User = require("./models/User");
+
+const bodyParser = require("body-parser");
+
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-require("dotenv").config({ path: "variables.env"});
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true }, (err) =>{
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Connected to DB succesfully.");
-  }
-});
-
 //for Debugging
-app.get('/api/hello', (req, res) => {
+app.get("/api/hello", (req, res) => {
     res.send({ message: "Hello Express!" });
 });
 
 //get user list
-app.get('/api/users', (req, res) => {
+app.get("/api/users", (req, res) => {
     res.send([
         {
           "id": 1,
@@ -51,4 +47,40 @@ app.get('/api/users', (req, res) => {
     ]);
 })
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.get("/", (req, res) => {
+  const newUser = new User();
+
+  newUser.id = "123";
+  newUser.email = "123";
+  newUser.name = "123";
+  newUser.age = "123";
+  newUser.gender = "123";
+
+  newUser.save()
+  .then(user => {
+    console.log(user);
+    res.json({
+      message: "New user is created succesfully."
+    });
+  })
+  .catch(err => {
+    res.json({
+      message: "Failed to create new user."
+    })
+  })
+});
+
+app.listen(port, err => {
+  if (err) {
+    return console.log(err);
+  } else {
+    console.log(`listening on port ${port}`);
+    mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true}, err => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Connected to DB succesfully.");
+      }
+    });
+  }
+});
