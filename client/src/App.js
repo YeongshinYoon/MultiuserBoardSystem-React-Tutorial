@@ -1,14 +1,17 @@
 import "./App.css";
-import React, { Component } from "react";
-import User from "./components/User";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { withStyles } from "@material-ui/core/styles";
+import React, { useState } from "react"
+import User from "./components/User"
+import Paper from "@material-ui/core/Paper"
+import Table from "@material-ui/core/Table"
+import TableHead from "@material-ui/core/TableHead"
+import TableBody from "@material-ui/core/TableBody"
+import TableRow from "@material-ui/core/TableRow"
+import TableCell from "@material-ui/core/TableCell"
+import CircularProgress from "@material-ui/core/CircularProgress"
+import { BrowserRouter as Router, Route, Routes, Switch } from "react-router-dom"
+import Login from "./pages/login"
+import SignUp from "./pages/signup"
+import { withStyles } from "@material-ui/core/styles"
 
 const styles = theme => ({
   root: {
@@ -17,7 +20,7 @@ const styles = theme => ({
     overflowX: "auto"
   },
   table: {
-    minWidth: 1080
+    //minWidth: 1080
   },
   progress: {
     margin: theme.spacing(2)
@@ -32,8 +35,18 @@ componentDidMount()
 shouldComponentUpdate()
 */
 
-class App extends Component {
-  state = {
+function App() {
+  const [ User, setUser ] = useState({
+    Username: ""
+  })
+
+  return (
+    <div>
+      <Login />
+    </div>
+  )
+}
+  /*state = {
     users: "",
     completed: 0
   }
@@ -97,7 +110,6 @@ class App extends Component {
         </Table>
       </Paper>
     )
-  }
-}
+  }*/
 
 export default withStyles(styles)(App);
