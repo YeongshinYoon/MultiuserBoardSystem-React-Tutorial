@@ -15,16 +15,30 @@ const userSchema = new Schema(
     }
 )
 
-const writingSchema = new Schema(
+const boardContentSchema = new Schema(
     {
-        content: { type: String, required: true },
-        user: { type: Schema.Types.ObjectId, ref: "Users" }
+        num: { type: Number, required: true },
+        title: { type: String, required: true},
+        writer: { type: String, required: true },
+        createdAt: { type: String, required: true},
+        view: { type: Number, required: true }
+    },
+    {
+        timestamps: true
+    }
+)
+
+const postingSchema = new Schema(
+    {
+        boardContent: { type: mongoose.Types.ObjectId, required: true },
+        content: { type: String, required: true }
     }
 )
 
 const Users = mongoose.model("Users", userSchema, "Users")
-const Writings = mongoose.model("Writings", writingSchema, "Writings")
+const BoardContents = mongoose.model("BoardContents", boardContentSchema, "BoardContents")
+const Postings = mongoose.model("Postings", postingSchema, "Postings")
 
-const mySchemas = {"Users": Users, "Writings": Writings}
+const mySchemas = {"Users": Users, "BoardContents": BoardContents, "Postings": Postings}
 
 module.exports = mySchemas

@@ -64,21 +64,31 @@ app.post("/api/signupProc", async (req, res) => {
   }
 })
 
-app.get("/api/addWriting", async (req, res) => {
-  const user = Schemas.Users
-  const userID = await user.findOne({username: "test"}).exec()
-  console.log(userID)
-  const newWriting = new Schemas.Writings({ content: "test", user: userID._id})
+app.get("/api/addBoardContent", async (req, res) => {
+  const user = await (Schemas.Users).findOne({username: "test1"}).exec()
+  const newBoardContent = new Schemas.BoardContents({ num: 1, title: "test1", writer: user.username, date: "2021-12-17 18:02", view: 0 })
+  const newPosting = new Schemas.Postings({ boardContent: newBoardContent._id, content: "test1" })
   
   try {
-    await newWriting.save( async (err, newUserResult) => {
-      console.log("New writing added!")
-      res.end("New writing added!")
+    await newBoardContent.save( async (err, result) => {
+      console.log("New board content added!")
+      res.end("New board content added!")
+    })
+    await newPosting.save( async (err, result) => {
+      console.log("New posting added!")
+      res.end("New posting added!")
     })
   } catch (err) {
     console.log(err)
-    res.end("Writing not added!")
+    res.end("Posting not added!")
   }
+})
+
+app.get("/api/getBoardContents", async (req, res) => {
+  const boardContent = Schemas.BoardContents
+  const boardContents = await boardContent.find().exec()
+
+  res.send(boardContents)
 })
 
 app.listen(port, err => {
