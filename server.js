@@ -30,15 +30,27 @@ app.get("/api/users", (req, res) => {
   ])
 })
 
-app.post("/api/loginProc", (req, res) => {
+app.post("/api/loginProc", async (req, res) => {
   const username = req.body.Username
   const password = req.body.Password
   console.log("Username: ", username)
   console.log("Password: ", password)
+
+  const users = Schemas.Users
+  const user = await users.findOne({username: username, password: password}).exec()
+  console.log(user)
 })
 
-app.get("/api/addUser", async (req, res) => {
-  const user = { username: "test", email: "test@test.com", name: "test", age: 1, gender: "male" }
+app.post("/api/signupProc", async (req, res) => {
+  const user = {
+    email: req.body.Email,
+    username: req.body.Username,
+    password: req.body.Password,
+    name: req.body.Name,
+    birthday: req.body.Birthday,
+    gender: req.body.Gender
+  }
+  console.log(user)
   const newUser = new Schemas.Users(user)
 
   try {

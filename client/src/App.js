@@ -9,13 +9,15 @@ import TableRow from "@material-ui/core/TableRow"
 import TableCell from "@material-ui/core/TableCell"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import { BrowserRouter as Router, Route, Routes, Switch } from "react-router-dom"
+import { withStyles } from "@material-ui/core/styles"
+
+// Pages
 import Login from "./pages/login"
 import SignUp from "./pages/signup"
-import { withStyles } from "@material-ui/core/styles"
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: "100%",
     marginTop: theme.spacing(3),
     overflowX: "auto"
   },
@@ -42,7 +44,13 @@ function App() {
 
   return (
     <div>
-      <Login />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </Router>
     </div>
   )
 }
