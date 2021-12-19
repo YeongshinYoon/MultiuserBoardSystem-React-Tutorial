@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles"
 
 // Pages
 import HymnList from "./pages/hymnList"
+import HymnPlay from "./pages/hymnPlay"
 import AddHymn from "./pages/addHymn"
 
 const styles = theme => ({
@@ -14,7 +15,7 @@ const styles = theme => ({
     overflowX: "auto"
   },
   table: {
-    //minWidth: 1080
+    minWidth: 1080
   },
   progress: {
     margin: theme.spacing(2)
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HymnList />} />
           <Route exact path="/addHymn" element={<AddHymn />} />
+          <Route path="/hymnPlay/*" element={<HymnPlay />} />
         </Routes>
       </Router>
     </div>

@@ -1,6 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
+import styled from "styled-components"
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    box-sizing: border-box;
+    display: block;
+`
 
 class HymnContents extends Component {
     render() {
@@ -8,7 +16,15 @@ class HymnContents extends Component {
         return (
             <TableRow>
                 <TableCell>{this.props.page}</TableCell>
-                <TableCell>{this.props.title}</TableCell>
+                <TableCell><Link
+                    to={`/hymnPlay/${this.props.page}`}
+                    state={{
+                        page: this.props.page,
+                        title: this.props.title,
+                        verses: this.props.verses,
+                        lyric: this.props.lyric,
+                        length: this.props.length
+                    }}>{this.props.title}</Link></TableCell>
                 <TableCell>{this.props.verses}</TableCell>
                 <TableCell>{this.props.length}</TableCell>
             </TableRow>
@@ -16,4 +32,14 @@ class HymnContents extends Component {
     }
 }
 
-export default HymnContents;
+export default HymnContents
+
+/*
+state: {
+    page: this.props.page,
+    title: this.props.title,
+    verses: this.props.verses,
+    lyric: this.props.lyric,
+    length: this.props.length
+}
+*/

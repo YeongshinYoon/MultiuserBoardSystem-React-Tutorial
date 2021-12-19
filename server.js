@@ -17,6 +17,10 @@ app.get("/api/getHymns", async (req, res) => {
   res.send(hymns)
 })
 
+app.get("/api/getHymn", async (req, res) => {
+  
+})
+
 app.post("/api/addHymn", async (req, res) => {
   const hymn = {
     page: req.body.page,

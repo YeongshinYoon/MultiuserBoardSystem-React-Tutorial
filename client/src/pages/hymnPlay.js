@@ -1,15 +1,6 @@
-import React, { useState } from "react"
-import styled from "styled-components"
-import { Link } from "react-router-dom"
-import axios from "axios"
-
-const StyledLink = styled(Link)`
-    box-sizing: border-box;
-    display: block;
-    padding: 4px 8px;
-    margin: 0 auto;
-    text-align: center;
-`
+import React, { Component } from "react"
+import HymnDetails from "../components/HymnDetails"
+import {useLocation} from "react-router-dom"
 
 const divStyle = {
     display: "flex",
@@ -18,67 +9,23 @@ const divStyle = {
     alignItems: "center"
 }
 
-function Login() {
-    // Input of Username, Password
-    const [Account, setAccount] = useState({
-        Username: "",
-        Password: ""
-    })
-
-    // Handler
-    //// for Input
-    const onAccountChangeHandler = (event) => {
-        setAccount({
-            ...Account,
-            [event.currentTarget.name]: event.currentTarget.value
-        })
-    }
-    ////for Login
-    const onSubmitHandler = async (event) => {
-        event.preventDefault()
-
-        // for Debugging
-        console.log("Username: ", Account.Username, "Password", Account.Password)
-
-        axios.get("/api/users")
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-
-        axios.post("/api/loginProc", {
-            "Username": Account.Username,
-            "Password": Account.Password
-        })
-        .then(res => console.log(res))
-        .catch()
+function HymnPlay() {
+    const location = useLocation()
+    console.log(location)
+    if (location.state == undefined) {
+        console.log("WTF")
     }
 
-    // for Debugging
-    /*useEffect(() => {
-        axios.get("/api/users")
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    }, [])*/
-
-    // 두 개 이상의 컴포넌트는 div로 묶어야
     return (
-        <div style={divStyle}>
-            <h2>로그인</h2>
-            <form style={{
-                display: "flex",
-                flexDirection: "column"}}
-                onSubmit={onSubmitHandler}>
-                <label>Username</label>
-                <input type="text" name="Username" placeholder="" value={Account.Username} onChange={onAccountChangeHandler} />
-                <label>Password</label>
-                <input type="password" name="Password" placeholder="" value={Account.Password} onChange={onAccountChangeHandler} />
-                <br />
-                <div style={divStyle}>
-                    <button type="submit" style={{ width: "100px" }}>로그인</button>
-                    <StyledLink to="/signup"><button style={{ width: "100px" }}>회원가입</button></StyledLink>
-                </div>
-            </form>
-        </div>
+        // 두 개 이상의 컴포넌트는 div로 묶어야
+        <HymnDetails
+            page = {location.state.page}
+            title = {location.state.title}
+            verses = {location.state.verses}
+            lyric = {location.state.lyric}
+            length = {location.state.length}
+        />
     )
 }
 
-export default Login
+export default HymnPlay
