@@ -1,86 +1,51 @@
-const express = require("express");
-const app = express();
+const express = require("express")
+const app = express()
 
-const mongoose = require("mongoose");
-require("dotenv").config({ path: "variables.env"});
-const Schemas = require("./models/Schemas");
+const mongoose = require("mongoose")
+require("dotenv").config({ path: "variables.env"})
+const Schemas = require("./models/Schemas")
 
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser")
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-//get List of Users (for Debugging)
-app.get("/api/users", (req, res) => {
-  res.send([
-    {
-      "username": "test1",
-      "password": "test1"
-    },
-    {
-      "username": "test2",
-      "password": "test2"
-    },
-    {
-      "username": "test3",
-      "password": "test3"
+app.get("/api/getHymns", async (req, res) => {
+  const hymns = await (Schemas.Hymns).find().exec()
+  res.send(hymns)
+})
+
+app.post("/api/addHymn", async (req, res) => {
+  const hymn = {
+    page: req.body.page,
+    title: req.body.title,
+    lyric: req.body.lyric,
+    verses: req.body.verses,
+    length: req.body.length,
+    password: req.body.password
+  }
+
+  if (hymn.password === process.env.ADMIN_PW) {
+    const newHymn = new Schemas.Hymns({
+      page: hymn.page,
+      title: hymn.title,
+      lyric: hymn.lyric,
+      verses: hymn.verses,
+      length: hymn.length})
+    
+    try {
+      await newHymn.save( async (err, result) => {
+        console.log("Added successfully.")
+        res.end("Added successfully.")
+      })
+    } catch (err) {
+      console.log(err)
+      res.end("Failed to add.")
     }
-  ])
-})
-
-app.post("/api/loginProc", async (req, res) => {
-  const username = req.body.Username
-  const password = req.body.Password
-  console.log("Username: ", username)
-  console.log("Password: ", password)
-
-  const users = Schemas.Users
-  const user = await users.findOne({username: username, password: password}).exec()
-  console.log(user)
-})
-
-app.post("/api/signupProc", async (req, res) => {
-  const user = {
-    email: req.body.Email,
-    username: req.body.Username,
-    password: req.body.Password,
-    name: req.body.Name,
-    birthday: req.body.Birthday,
-    gender: req.body.Gender
-  }
-  console.log(user)
-  const newUser = new Schemas.Users(user)
-
-  try {
-    await newUser.save( async (err, newUserResult) => {
-      console.log("New user created!")
-      res.end("New user created!")
-    })
-  } catch (err) {
-    console.log(err)
-    res.end("User not added!")
-  }
-})
-
-app.get("/api/addBoardContent", async (req, res) => {
-  const user = await (Schemas.Users).findOne({username: "test1"}).exec()
-  const newBoardContent = new Schemas.BoardContents({ num: 1, title: "test1", writer: user.username, date: "2021-12-17 18:02", view: 0 })
-  const newPosting = new Schemas.Postings({ boardContent: newBoardContent._id, content: "test1" })
-  
-  try {
-    await newBoardContent.save( async (err, result) => {
-      console.log("New board content added!")
-      res.end("New board content added!")
-    })
-    await newPosting.save( async (err, result) => {
-      console.log("New posting added!")
-      res.end("New posting added!")
-    })
-  } catch (err) {
-    console.log(err)
-    res.end("Posting not added!")
+  } else {
+    res.end("Invalid password.")
   }
 })
 

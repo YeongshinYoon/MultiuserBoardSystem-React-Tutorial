@@ -4,9 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { withStyles } from "@material-ui/core/styles"
 
 // Pages
-import Login from "./pages/login"
-import SignUp from "./pages/signup"
-import Board from "./pages/board"
+import HymnList from "./pages/hymnList"
+import AddHymn from "./pages/addHymn"
 
 const styles = theme => ({
   root: {
@@ -35,10 +34,8 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Board />} />
-          <Route path="/board" element={<Board />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route exact path="/" element={<HymnList />} />
+          <Route exact path="/addHymn" element={<AddHymn />} />
         </Routes>
       </Router>
     </div>

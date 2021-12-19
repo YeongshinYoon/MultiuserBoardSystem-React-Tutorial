@@ -1,4 +1,4 @@
-## Multi-user Board System
+## Worship Helper
 This project is simply made for practice of React and Node JS.
 
 # Getting Started with Create React App

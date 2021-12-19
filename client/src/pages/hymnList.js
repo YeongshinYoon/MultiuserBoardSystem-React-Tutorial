@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import BoardContents from "../components/BoardContents"
+import HymnContents from "../components/HymnContents"
 import Paper from "@material-ui/core/Paper"
 import Table from "@material-ui/core/Table"
 import TableHead from "@material-ui/core/TableHead"
@@ -8,7 +8,7 @@ import TableRow from "@material-ui/core/TableRow"
 import TableCell from "@material-ui/core/TableCell"
 import CircularProgress from "@material-ui/core/CircularProgress"
 
-class Board extends Component {
+class hymnList extends Component {
   state = {
     contents: "",
     completed: 0
@@ -22,7 +22,7 @@ class Board extends Component {
   }
 
   callAPI = async () => {
-    const response = await fetch('/api/getBoardContents');
+    const response = await fetch("/api/getHymns");
     const body = await response.json();
     return body;
   }
@@ -35,26 +35,23 @@ class Board extends Component {
   render() {
     return (
       <Paper><Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>게시글 번호</TableCell>
-            <TableCell>제목</TableCell>
-            <TableCell>작성자</TableCell>
-            <TableCell>작성일</TableCell>
-            <TableCell>조회수</TableCell>
-          </TableRow>
-        </TableHead>
+        <TableHead><TableRow>
+          <TableCell>장수</TableCell>
+          <TableCell>제목</TableCell>
+          <TableCell>절수</TableCell>
+          <TableCell>길이</TableCell>
+        </TableRow></TableHead>
         <TableBody>
         {
           this.state.contents ? this.state.contents.map(c => {
             return (
-              <BoardContents
+              <HymnContents
                 key = {c._id}
-                num = {c.num}
+                page = {c.page}
                 title = {c.title}
-                writer = {c.writer}
-                createdAt = {c.createdAt}
-                view = {c.view}/>
+                verses = {c.verses}
+                length = {c.length}
+              />
             )
           }) : ""
         }
@@ -64,4 +61,4 @@ class Board extends Component {
   }
 }
 
-export default Board
+export default hymnList
