@@ -28,8 +28,11 @@ function AddHymn() {
             length: HymnInput.length,
             password: HymnInput.password,
         })
-        .then(res => console.log(res))
-        .catch()
+        .then(res => alert(res.data))
+        .catch(err => {
+            console.log(err)
+            alert("Failed to add.")
+        })
     }
 
     // 두 개 이상의 컴포넌트는 div로 묶어야

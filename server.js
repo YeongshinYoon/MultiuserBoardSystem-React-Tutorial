@@ -17,10 +17,6 @@ app.get("/api/getHymns", async (req, res) => {
   res.send(hymns)
 })
 
-app.get("/api/getHymn", async (req, res) => {
-  
-})
-
 app.post("/api/addHymn", async (req, res) => {
   const hymn = {
     page: req.body.page,
@@ -41,15 +37,14 @@ app.post("/api/addHymn", async (req, res) => {
     
     try {
       await newHymn.save( async (err, result) => {
-        console.log("Added successfully.")
-        res.end("Added successfully.")
+        res.send("Added successfully.")
       })
     } catch (err) {
       console.log(err)
-      res.end("Failed to add.")
+      res.send("Failed to add.")
     }
   } else {
-    res.end("Invalid password.")
+    res.send("Invalid password.")
   }
 })
 

@@ -33,13 +33,3 @@ class HymnContents extends Component {
 }
 
 export default HymnContents
-
-/*
-state: {
-    page: this.props.page,
-    title: this.props.title,
-    verses: this.props.verses,
-    lyric: this.props.lyric,
-    length: this.props.length
-}
-*/
