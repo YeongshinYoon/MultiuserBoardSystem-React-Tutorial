@@ -7,6 +7,7 @@ import "react-h5-audio-player/lib/styles.css"
 
 class HymnDetails extends Component {
     render() {
+        console.log("../hymns/" + this.props.page + "_기도.mp3")
         const mp3_pray = require("../hymns/" + this.props.page + "_기도.mp3")
         const mp3_sing = require("../hymns/" + this.props.page + "_찬송.mp3")
 
