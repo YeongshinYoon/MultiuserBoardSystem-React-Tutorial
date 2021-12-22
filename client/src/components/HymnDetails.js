@@ -7,11 +7,8 @@ import "react-h5-audio-player/lib/styles.css"
 
 class HymnDetails extends Component {
     render() {
-        //const pray_url = "http://localhost:3000/api/getHymn/" + this.props.page + "_기도.mp3"
-        //const sing_url = "http://localhost:3000/api/getHymn/" + this.props.page + "_찬송.mp3"
-
-        const pray_url = "http://34.145.59.160/api/getHymn/" + this.props.page + "_기도.mp3"
-        const sing_url = "http://34.145.59.160/api/getHymn/" + this.props.page + "_찬송.mp3"
+        const pray = require("../hymns/" + this.props.page + "_기도.mp3")
+        const sing = require("../hymns/" + this.props.page + "_찬송.mp3")
 
         return (
             <Table>
@@ -40,14 +37,14 @@ class HymnDetails extends Component {
                 <TableRow>
                     <TableCell>기도 반주</TableCell>
                     <TableCell><AudioPlayer
-                        src={pray_url}
+                        src={pray}
                         onPlay={e => console.log("onPlay")}
                     /></TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>찬송 반주</TableCell>
                     <TableCell><AudioPlayer
-                        src={sing_url}
+                        src={sing}
                         onPlay={e => console.log("onPlay")}
                     /></TableCell>
                 </TableRow>
