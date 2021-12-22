@@ -1,4 +1,5 @@
 const express = require("express")
+const fs = require("fs")
 const app = express()
 
 const mongoose = require("mongoose")
@@ -17,7 +18,25 @@ app.get("/api/getHymns", async (req, res) => {
   res.send(hymns)
 })
 
-app.post("/api/addHymn", async (req, res) => {
+app.get("/api/getHymn/pray/:page", async (req, res) => {
+  const page = req.params.page
+  fs.readFile("./hymns/" + page + "_기도.mp3", (err, data) => {
+    res.writeHead(200, {"Content-Type": "audio/mpeg"})
+    res.write(data)
+    res.end("success")
+  })
+})
+
+app.get("/api/getHymn/sing/:page", async (req, res) => {
+  const page = req.params.page
+  fs.readFile("./hymns/" + page + "_찬송.mp3", (err, data) => {
+    res.writeHead(200, {"Content-Type": "audio/mpeg"})
+    res.write(data)
+    res.end("success")
+  })
+})
+
+app.post("/api/addHymn:page", async (req, res) => {
   const hymn = {
     page: req.body.page,
     title: req.body.title,
