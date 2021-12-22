@@ -8,8 +8,8 @@ import "react-h5-audio-player/lib/styles.css"
 
 class HymnDetails extends Component {
     render() {
-        const pray_url = "http://34.145.59.160/api/getHymn/pray/" + this.props.page
-        const sing_url = "http://34.145.59.160/api/getHymn/sing/" + this.props.page
+        const pray_url = "http://34.145.59.160/api/getHymn/" + this.props.page + "_기도.mp3"
+        const sing_url = "http://34.145.59.160/api/getHymn/" + this.props.page + "_찬송.mp3"
 
         return (
             <Table>
