@@ -24,8 +24,8 @@ app.get("/api/getHymn/:filename", async (req, res) => {
   const path = "./hymns/" + filename
 
   fs.readFile(path, (err, data) => {
+    console.log(data)
     res.send(data)
-    res.end("Success")
   })
 })
 
