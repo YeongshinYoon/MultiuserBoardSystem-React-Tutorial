@@ -7,7 +7,6 @@ require("dotenv").config({ path: "variables.env"})
 const Schemas = require("./models/Schemas")
 
 const bodyParser = require("body-parser")
-const { response } = require("express")
 
 const port = process.env.PORT || 5000
 
@@ -24,12 +23,12 @@ app.get("/api/getHymn/:filename", async (req, res) => {
   const path = "./hymns/" + filename
 
   fs.readFile(path, (err, data) => {
-    console.log(data)
+    //res.write(data)
     res.send(data)
   })
 })
 
-app.post("/api/addHymn:page", async (req, res) => {
+app.post("/api/addHymn", async (req, res) => {
   const hymn = {
     page: req.body.page,
     title: req.body.title,
@@ -58,13 +57,6 @@ app.post("/api/addHymn:page", async (req, res) => {
   } else {
     res.send("Invalid password.")
   }
-})
-
-app.get("/api/getBoardContents", async (req, res) => {
-  const boardContent = Schemas.BoardContents
-  const boardContents = await boardContent.find().exec()
-
-  res.send(boardContents)
 })
 
 app.listen(port, err => {

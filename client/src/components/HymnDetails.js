@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import Axios from "axios"
 import Table from "@material-ui/core/Table"
 import TableRow from "@material-ui/core/TableRow"
 import TableCell from "@material-ui/core/TableCell"
@@ -8,8 +7,11 @@ import "react-h5-audio-player/lib/styles.css"
 
 class HymnDetails extends Component {
     render() {
-        const pray_url = "http://localhost:3000/api/getHymn/" + this.props.page + "_기도.mp3"
-        const sing_url = "http://localhost:3000/api/getHymn/" + this.props.page + "_찬송.mp3"
+        //const pray_url = "http://localhost:3000/api/getHymn/" + this.props.page + "_기도.mp3"
+        //const sing_url = "http://localhost:3000/api/getHymn/" + this.props.page + "_찬송.mp3"
+
+        const pray_url = "http://34.145.59.160/api/getHymn/" + this.props.page + "_기도.mp3"
+        const sing_url = "http://34.145.59.160/api/getHymn/" + this.props.page + "_찬송.mp3"
 
         return (
             <Table>
