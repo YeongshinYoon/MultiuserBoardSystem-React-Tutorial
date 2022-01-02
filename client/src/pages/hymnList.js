@@ -50,7 +50,9 @@ class hymnList extends Component {
                 page = {c.page}
                 title = {c.title}
                 verses = {c.verses}
-                lyric = {c.lyric}
+                lyric_kr = {c.lyric_kr}
+                lyric_en = {c.lyric_en}
+                lyric_jp = {c.lyric_jp}
                 length = {c.length}
               />
             )

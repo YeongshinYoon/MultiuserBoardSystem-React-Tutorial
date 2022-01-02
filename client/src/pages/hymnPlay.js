@@ -22,7 +22,9 @@ function HymnPlay() {
             page = {location.state.page}
             title = {location.state.title}
             verses = {location.state.verses}
-            lyric = {location.state.lyric}
+            lyric_kr = {location.state.lyric_kr}
+            lyric_en = {location.state.lyric_en}
+            lyric_jp = {location.state.lyric_jp}
             length = {location.state.length}
         />
     )

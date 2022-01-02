@@ -22,7 +22,9 @@ class HymnContents extends Component {
                         page: this.props.page,
                         title: this.props.title,
                         verses: this.props.verses,
-                        lyric: this.props.lyric,
+                        lyric_kr: this.props.lyric_kr,
+                        lyric_en: this.props.lyric_en,
+                        lyric_jp: this.props.lyric_jp,
                         length: this.props.length
                     }}>{this.props.title}</Link></TableCell>
                 <TableCell>{this.props.verses}</TableCell>

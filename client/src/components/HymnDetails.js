@@ -6,6 +6,44 @@ import AudioPlayer from "react-h5-audio-player"
 import "react-h5-audio-player/lib/styles.css"
 
 class HymnDetails extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            selectedValue: "korean",
+            selectedLyric: this.props.lyric_kr
+        }
+    }
+
+    onItemChange = (e) => {
+        this.setState({
+            selectedValue: e.target.value
+        })
+
+        switch (e.target.value) {
+            case "korean":
+                this.setState({
+                    selectedLyric: this.props.lyric_kr
+                })
+                break
+            case "english":
+                this.setState({
+                    selectedLyric: this.props.lyric_en
+                })
+                break
+            case "japanese":
+                this.setState({
+                    selectedLyric: this.props.lyric_jp
+                })
+                break
+            default:
+                this.setState({
+                    selectedLyric: this.props.lyric_kr
+                })
+                break
+        }
+    }
+
     render() {
         const pray = require("../hymns/" + this.props.page + "_기도.mp3")
         const sing = require("../hymns/" + this.props.page + "_찬송.mp3")
@@ -26,9 +64,45 @@ class HymnDetails extends Component {
                 </TableRow>
                 <TableRow>
                     <TableCell>가사</TableCell>
-                    <TableCell>{this.props.lyric.split("<br>").map((line) => {
-                        return (<>{line}<br /></>)
-                    })}</TableCell>
+                    <TableCell>
+                        <TableRow>
+                            <TableCell>
+                                <input
+                                    id="lyric_kr"
+                                    value="korean"
+                                    type="radio"
+                                    checked={this.state.selectedValue === "korean"}
+                                    onChange={this.onItemChange}
+                                />
+                                한국어
+                            </TableCell>
+                            <TableCell>
+                                <input
+                                    id="lyric_en"
+                                    value="english"
+                                    type="radio"
+                                    checked={this.state.selectedValue === "english"}
+                                    onChange={this.onItemChange}
+                                />
+                                English
+                            </TableCell>
+                            <TableCell>
+                                <input
+                                    id="lyric_jp"
+                                    value="japanese"
+                                    type="radio"
+                                    checked={this.state.selectedValue === "japanese"}
+                                    onChange={this.onItemChange}
+                                />
+                                日本語
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell colSpan="3">{this.state.selectedLyric.split("<br>").map((line) => {
+                                return (<>{line}<br /></>)
+                            })}</TableCell>
+                        </TableRow>
+                    </TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>길이</TableCell>
