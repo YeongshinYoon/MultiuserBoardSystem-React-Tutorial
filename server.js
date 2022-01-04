@@ -32,7 +32,9 @@ app.post("/api/addHymn", async (req, res) => {
   const hymn = {
     page: req.body.page,
     title: req.body.title,
-    lyric: req.body.lyric,
+    lyric_kr: req.body.lyric_kr,
+    lyric_en: req.body.lyric_en,
+    lyric_jp: req.body.lyric_jp,
     verses: req.body.verses,
     length: req.body.length,
     password: req.body.password
@@ -42,13 +44,20 @@ app.post("/api/addHymn", async (req, res) => {
     const newHymn = new Schemas.Hymns({
       page: hymn.page,
       title: hymn.title,
-      lyric: hymn.lyric,
+      lyric_kr: hymn.lyric_kr,
+      lyric_en: hymn.lyric_en,
+      lyric_jp: hymn.lyric_jp,
       verses: hymn.verses,
       length: hymn.length})
     
     try {
       await newHymn.save( async (err, result) => {
-        res.send("Added successfully.")
+        if (err) {
+          res.send("Failed to add. : " + err.message)
+        }
+        else {
+          res.send("Added successfully.")
+        }
       })
     } catch (err) {
       console.log(err)
