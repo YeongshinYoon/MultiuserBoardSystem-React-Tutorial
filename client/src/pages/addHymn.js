@@ -5,7 +5,9 @@ function AddHymn() {
     const [HymnInput, setHymnInput] = useState({
         page: 0,
         title: "",
-        lyric: "",
+        lyric_kr: "",
+        lyric_en: "",
+        lyric_jp: "",
         verses: 0,
         length: "",
         password: "",
@@ -23,7 +25,9 @@ function AddHymn() {
         axios.post("/api/addHymn", {
             page: HymnInput.page,
             title: HymnInput.title,
-            lyric: HymnInput.lyric,
+            lyric_kr: HymnInput.lyric_kr,
+            lyric_en: HymnInput.lyric_en,
+            lyric_jp: HymnInput.lyric_jp,
             verses: HymnInput.verses,
             length: HymnInput.length,
             password: HymnInput.password,
@@ -51,8 +55,12 @@ function AddHymn() {
                 <input type="text" name="title" placeholder="ex) 만복의 근원 하나님" value={HymnInput.title} onChange={onHymnInputChangeHandler} />
                 <label>절수</label>
                 <input type="number" name="verses" placeholder="ex) 2" value={HymnInput.verses} onChange={onHymnInputChangeHandler} />
-                <label>가사</label>
-                <input type="text" name="lyric" placeholder="ex) 1. (1절 가사)\n2. (2절 가사)\n아멘" value={HymnInput.lyric} onChange={onHymnInputChangeHandler} />
+                <label>한국어 가사</label>
+                <input type="text" name="lyric_kr" placeholder="ex) 1. (1절 가사)<br>2. (2절 가사)<br>아멘" value={HymnInput.lyric_kr} onChange={onHymnInputChangeHandler} />
+                <label>영어 가사</label>
+                <input type="text" name="lyric_en" placeholder="ex) 1. (1절 가사)<br>2. (2절 가사)<br>아멘" value={HymnInput.lyric_en} onChange={onHymnInputChangeHandler} />
+                <label>일본어 가사</label>
+                <input type="text" name="lyric_jp" placeholder="ex) 1. (1절 가사)<br>2. (2절 가사)<br>아멘" value={HymnInput.lyric_jp} onChange={onHymnInputChangeHandler} />
                 <label>길이</label>
                 <input type="text" name="length" placeholder="ex) mm분 hh초" value={HymnInput.length} onChange={onHymnInputChangeHandler} />
                 <label>관리자 비밀번호</label>
