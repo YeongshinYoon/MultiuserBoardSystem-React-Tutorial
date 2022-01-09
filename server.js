@@ -18,13 +18,13 @@ app.get("/api/getHymns", async (req, res) => {
   res.send(hymns)
 })
 
-app.get("/api/getHymn/:filename", async (req, res) => {
+app.get("/api/getHymn/:filename", (req, res) => {
   const filename = req.params.filename
   const path = "./hymns/" + filename
 
   fs.readFile(path, (err, data) => {
-    //res.write(data)
     res.send(data)
+    res.end()
   })
 })
 

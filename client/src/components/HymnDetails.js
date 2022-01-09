@@ -45,8 +45,10 @@ class HymnDetails extends Component {
     }
 
     render() {
-        const pray = require("../hymns/" + this.props.page + "_기도.mp3")
-        const sing = require("../hymns/" + this.props.page + "_찬송.mp3")
+        const pray = "http://localhost:3000/api/getHymn/" + this.props.page + "_기도.mp3"
+        const sing = "http://localhost:3000/api/getHymn/" + this.props.page + "_찬송.mp3"
+        //const pray = require("../hymns/" + this.props.page + "_기도.mp3")
+        //const sing = require("../hymns/" + this.props.page + "_찬송.mp3")
 
         return (
             <Table>

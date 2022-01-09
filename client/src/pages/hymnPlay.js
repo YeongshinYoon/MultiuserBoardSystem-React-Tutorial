@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import HymnDetails from "../components/HymnDetails"
-import {useLocation} from "react-router-dom"
+import { useLocation } from "react-router-dom"
+import Axios from "axios"
 
 const divStyle = {
     display: "flex",
@@ -12,9 +13,9 @@ const divStyle = {
 function HymnPlay() {
     const location = useLocation()
     console.log(location)
-    if (location.state == undefined) {
-        console.log("WTF")
-    }
+
+    Axios.get("http://localhost:3000/api/getHymn/" + location.state.page + "_기도.mp3")
+    Axios.get("http://localhost:3000/api/getHymn/" + location.state.page + "_찬송.mp3")
 
     return (
         // 두 개 이상의 컴포넌트는 div로 묶어야
