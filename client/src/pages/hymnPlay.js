@@ -14,8 +14,8 @@ function HymnPlay() {
     const location = useLocation()
     console.log(location)
 
-    Axios.get("http://localhost:3000/api/getHymn/" + location.state.page + "_기도.mp3")
-    Axios.get("http://localhost:3000/api/getHymn/" + location.state.page + "_찬송.mp3")
+    Axios.get("http://34.145.59.160/api/getHymn/" + location.state.page + "_기도.mp3")
+    Axios.get("http://34.145.59.160/api/getHymn/" + location.state.page + "_찬송.mp3")
 
     return (
         // 두 개 이상의 컴포넌트는 div로 묶어야

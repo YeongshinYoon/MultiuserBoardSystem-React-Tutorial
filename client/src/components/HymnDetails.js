@@ -45,8 +45,8 @@ class HymnDetails extends Component {
     }
 
     render() {
-        const pray = "http://localhost:3000/api/getHymn/" + this.props.page + "_기도.mp3"
-        const sing = "http://localhost:3000/api/getHymn/" + this.props.page + "_찬송.mp3"
+        const pray = "http://34.145.59.160/api/getHymn/" + this.props.page + "_기도.mp3"
+        const sing = "http://34.145.59.160/api/getHymn/" + this.props.page + "_찬송.mp3"
         //const pray = require("../hymns/" + this.props.page + "_기도.mp3")
         //const sing = require("../hymns/" + this.props.page + "_찬송.mp3")
 
