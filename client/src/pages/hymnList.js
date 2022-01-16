@@ -10,14 +10,12 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 
 class hymnList extends Component {
   state = {
-    contents: "",
-    completed: 0
+    contents: ""
   }
 
   componentDidMount() {
-    this.timer = setInterval(this.progress, 20);
     this.callAPI()
-    .then(res => this.setState({ contents: res}))
+    .then(res => this.setState({ contents: res }))
     .catch(err => console.log("componentDidMount(): ", err))
   }
 
@@ -25,11 +23,6 @@ class hymnList extends Component {
     const response = await fetch("/api/getHymns");
     const body = await response.json();
     return body;
-  }
-
-  progress = () => {
-    const { completed } = this.state;
-    this.setState({ completed: completed >= 100 ? 0 : completed + 1});
   }
 
   render() {
@@ -56,7 +49,12 @@ class hymnList extends Component {
                 length = {c.length}
               />
             )
-          }) : ""
+          }) : 
+          <TableCell>
+            <CircularProgress
+              variant="indeterminate"
+            />
+          </TableCell>
         }
         </TableBody>
       </Table></Paper>

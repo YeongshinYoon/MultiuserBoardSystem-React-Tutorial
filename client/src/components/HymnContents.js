@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom"
-import styled from "styled-components"
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-
-const StyledLink = styled(Link)`
-    text-decoration: none;
-    box-sizing: border-box;
-    display: block;
-`
 
 class HymnContents extends Component {
     render() {

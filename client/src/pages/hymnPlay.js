@@ -1,14 +1,7 @@
-import React, { Component } from "react"
+import React from "react"
 import HymnDetails from "../components/HymnDetails"
 import { useLocation } from "react-router-dom"
 import Axios from "axios"
-
-const divStyle = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-}
 
 function HymnPlay() {
     const location = useLocation()
